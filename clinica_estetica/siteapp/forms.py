@@ -23,7 +23,7 @@ class CadastroUsuarioForm(UserCreationForm):
     email = forms.EmailField(required=True, label="E-mail")
 
     class Meta:
-        model = Cliente  # <- modelo correto
+        model = Cliente  
         fields = ["username", "email", "password1", "password2"]
 
     def save(self, commit=True):
