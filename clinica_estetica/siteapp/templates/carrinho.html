@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carrinho</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <h2>Seu Carrinho</h2>
+    {% if itens %}
+        <ul>
+        {% for item in itens %}
+            <li>{{ item.servico.nome }} - R$ {{ item.servico.preco }} x {{ item.quantidade }} = R$ {{ item.subtotal }}</li>
+        {% endfor %}
+        </ul>
+        <p>Total: R$ {{ total }}</p>
+    {% else %}
+        <p>Seu carrinho está vazio.</p>
+    {% endif %}
+</body>
+</html>

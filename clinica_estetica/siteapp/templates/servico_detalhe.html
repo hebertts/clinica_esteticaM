@@ -1,0 +1,16 @@
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ servico.imagem.url }}" class="img-fluid rounded" alt="{{ servico.nome }}">
+        </div>
+        <div class="col-md-6">
+            <h2>{{ servico.nome }}</h2>
+            <p>{{ servico.descricao }}</p>
+            <h4 class="text-success">R$ {{ servico.preco }}</h4>
+            <p><strong>Duração:</strong> {{ servico.duracao }}</p>
+            <a href="#" class="btn btn-success">Agendar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

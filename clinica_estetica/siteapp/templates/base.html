@@ -1,0 +1,41 @@
+{% load static %}<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Estética Masculina{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        footer {
+            background-color: #212529;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-success" href="{% url 'home' %}">
+                Estética<span class="text-dark">+Masculina</span>
+            </a>
+            <!-- Add mais links e ícones aqui -->
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <div class="bg-success text-white text-center py-2">
+        <strong>Uma semana especial com até 50% OFF!</strong> Agende online e ganhe brindes exclusivos!
+    </div>
+
+    <!-- Conteúdo Principal -->
+    {% block content %}{% endblock %}
+
+    <!-- Rodapé -->
+    <footer class="text-center py-3 mt-5">
+        &copy; Clínica de Estética Masculina. Todos os direitos reservados.
+    </footer>
+
+</body>
+</html>

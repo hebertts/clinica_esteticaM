@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Clínica Estética</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Faixa superior -->
+    <div class="bg-success text-white text-center py-2">
+        <strong>Uma semana especial com até 50% OFF! </strong> Agende online e ganhe brindes exclusivos!
+    </div>
+
+    <!-- Barra superior -->
+    <div class="bg-light border-bottom py-2 px-4 d-flex justify-content-between align-items-center small">
+        <div>
+            <a href="#" class="text-muted me-3">Acessibilidade</a>
+            <a href="#" class="text-muted me-3">Marcas</a>
+        </div>
+        <div>
+            <a href="#" class="text-muted me-3">Ajuda</a>
+            <a href="#" class="text-muted me-3">Revenda</a>
+            <a href="#" class="text-muted me-3">Meus Agendamentos</a>
+            <a href="#" class="text-muted">Favoritos</a>
+        </div>
+    </div>
+
+    <!-- Logo, busca e ícones -->
+    <div class="d-flex justify-content-between align-items-center px-4 py-3">
+        <div>
+            <h2 class="fw-bold text-success m-0">Estética<span class="text-dark">+Masculina</span></h2>
+        </div>
+
+        <div class="w-50">
+            <input type="text" class="form-control" placeholder="Procure serviços, produtos ou profissionais...">
+        </div>
+
+        <div class="d-flex gap-3">
+            <a href="#" class="text-decoration-none text-dark">📍 Localização</a>
+            {% if user.is_authenticated and not user.is_superuser %}
+    <a href="{% url 'perfil' %}" class="text-decoration-none text-dark">👤 {{user.username}}</a>
+{% else %}
+    <a href="{% url 'cadastro' %}" class="text-decoration-none text-dark">👤 Entrar / Cadastrar</a>
+{% endif %}
+            <a href="#" class="text-decoration-none text-dark">🛒 Sacola</a>
+        </div>
+    </div>
+
+    <!-- Menu de categorias -->
+    <nav class="bg-white border-top border-bottom py-2">
+        <div class="container d-flex justify-content-center flex-wrap gap-3">
+            <a href="#" class="text-dark text-decoration-none">Lançamentos</a>
+            <a href="#" class="text-dark text-decoration-none">Pacotes</a>
+            <a href="#" class="text-dark text-decoration-none">Presentes</a>
+            <a href="#" class="text-dark text-decoration-none">Corpo e Rosto</a>
+            <a href="#" class="text-dark text-decoration-none">Depilação</a>
+            <a href="#" class="text-dark text-decoration-none">Barba</a>
+            <a href="#" class="text-dark text-decoration-none">Cabelos</a>
+            <a href="#" class="text-dark text-decoration-none">Infantil</a>
+            <a href="#" class="text-dark text-decoration-none">Masculino</a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+<div class="container mt-4">
+    <h3 class="mb-4">Serviços em Destaque</h3>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for servico in servicos %}
+        <div class="col">
+            <a href="{% url 'servico_detalhe' servico.id %}" class="text-decoration-none text-dark">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ servico.imagem.url }}" class="card-img-top" alt="{{ servico.nome }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ servico.nome }}</h5>
+                        <p class="card-text">{{ servico.descricao|truncatewords:20 }}</p>
+                        <p class="text-success fw-bold">R$ {{ servico.preco }}</p>
+                        <a href="{% url 'agendar_servico' servico.id %}" class="btn btn-success mt-auto">Agendar</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <p>Nenhum serviço disponível no momento.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <div class="container">
+        <p class="mb-0">© Clínica de Estética Masculina. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
